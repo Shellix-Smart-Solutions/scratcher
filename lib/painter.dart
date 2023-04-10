@@ -49,10 +49,10 @@ class ScratchPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     onDraw(size);
 
-    canvas.saveLayer(null, Paint());
+    canvas.saveLayer(null, Paint()..maskFilter = maskFilter);
 
     final areaRect = Rect.fromLTRB(0, 0, size.width, size.height);
-    canvas.drawRect(areaRect, Paint()..color = color);
+    canvas.drawRect(areaRect, Paint()..color = color..maskFilter = maskFilter);
     if (image != null && imageFit != null) {
       // TODO: why the ! are needed here, as check against null been performed?
       final imageSize = Size(image!.width.toDouble(), image!.height.toDouble());
@@ -62,7 +62,7 @@ class ScratchPainter extends CustomPainter {
       final outputSubrect =
           Alignment.center.inscribe(sizes.destination, areaRect);
 
-      canvas.drawImageRect(image!, inputSubrect, outputSubrect, Paint());
+      canvas.drawImageRect(image!, inputSubrect, outputSubrect, Paint()..maskFilter = maskFilter);
     }
 
     var path = Path();
