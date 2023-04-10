@@ -45,6 +45,7 @@ class Scratcher extends StatefulWidget {
     this.color = Colors.black,
     this.image,
     this.rebuildOnResize = true,
+    this.maskFilter,
     this.onChange,
     this.onThreshold,
     this.onScratchStart,
@@ -57,6 +58,8 @@ class Scratcher extends StatefulWidget {
 
   /// Whether new scratches can be applied
   final bool enabled;
+  
+  final ui.MaskFilter? maskFilter;
 
   /// Percentage level of scratch area which should be revealed to complete.
   final double? threshold;
@@ -167,6 +170,7 @@ class ScratcherState extends State<Scratcher> {
                   : CustomPaint(
                       foregroundPainter: ScratchPainter(
                         image: snapshot.data,
+                        maskFilter: widget.maskFilter,
                         imageFit: widget.image == null
                             ? null
                             : widget.image!.fit ?? BoxFit.cover,
