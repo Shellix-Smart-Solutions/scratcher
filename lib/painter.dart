@@ -9,6 +9,7 @@ class ScratchPainter extends CustomPainter {
     required this.points,
     required this.color,
     required this.onDraw,
+    this.maskFilter,
     this.image,
     this.imageFit,
   });
@@ -18,6 +19,9 @@ class ScratchPainter extends CustomPainter {
 
   /// Background color of the scratch area
   final Color color;
+  
+  /// Mask filter to be applied to paint.
+  final ui.MaskFilter? maskFilter;
 
   /// Callback called each time the painter is redraw
   final void Function(Size) onDraw;
@@ -35,6 +39,7 @@ class ScratchPainter extends CustomPainter {
       ..strokeWidth = strokeWidth
       ..blendMode = BlendMode.src
       ..strokeJoin = StrokeJoin.round
+      ..maskFilter = maskFilter
       ..style = PaintingStyle.stroke;
 
     return paint;
